@@ -9,7 +9,7 @@ The workshop and materials are hands-on and include examples and exercises. Afte
 
 We have borrowed from many sources for this material, most signficantly from Jeffery W. Hollister's IntroR course. Thank you, Jeff, for openly sharing your materials. In addition, material has been drawn from [Software Carpentry](http://software-carpentry.org), [Data Carpentry](http://datacarpentry.org/), and from R seminars given by numerous individuals at the USGS Center for Integrated Data Analytics and the USGS Wisconsin Water Science Center at the 2014-2015 R Lunch Bunch Data Crunch seminar series. We are grateful to all of these sources.
 
-Each step of the workflow has a written component (blog post) describing the topic, a demonstration of example code, and hands-on exercises. The R code found in each blog post is also available as a stand-alone R script of the same name. The blog posts are intended to be used as a reference after the workshop. There is a lesson 
+Each step of the workflow has a written component (blog post) describing the topic, a demonstration of example code, and hands-on exercises. The R code found in each blog post is also available as a stand-alone R script of the same name. The blog posts are intended to be used as a reference after the workshop. 
 
 ##Tentative Schedule
 
