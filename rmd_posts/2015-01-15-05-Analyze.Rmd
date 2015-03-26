@@ -1,20 +1,18 @@
 ---
 title: "05 - Analyze: Base"
-author: Jeffrey W. Hollister
+author: Emily Read
 layout: post_page
 ---
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
 options(repos="http://cran.rstudio.com/")
-if(!require("ggplot2")){
-  install.packages("ggplot2")
-}
+
 if(!require("dplyr")){
   install.packages("dplyr")
 }
 if(!require("randomForest")){
   install.packages("randomForest")
 }
-library("ggplot2")
+
 library("dplyr")
 ```
 
