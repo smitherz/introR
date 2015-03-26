@@ -31,7 +31,7 @@ authors:
 
 paginate:         15
 
-timezone:         America/New_York
+timezone:         America/Chicago
 
 #Plugins
 gems:
