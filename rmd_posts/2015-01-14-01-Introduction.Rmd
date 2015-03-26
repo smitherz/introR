@@ -1,6 +1,6 @@
 ---
 title: "01 - Introduction to R: The basics"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Luke Winslow
 layout: post_page
 ---
 
