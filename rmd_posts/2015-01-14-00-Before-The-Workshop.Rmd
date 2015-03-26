@@ -1,13 +1,45 @@
 ---
 title: "00 - Before The Workshop"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Luke Winslwo
 layout: post_page
 ---
 
 Prior to the start of the workshop everyone will need to have had the software 
-installed and tested.  Install of R, RStudio and Strawberry Perl does not require an open source software form.  EZ Tech has it set up so that they can simply push the install, remotely, to your machines.  The current installs via this method are a bit dated.  The process has been started to update these and hopefully the most recent versions of all the required software will be available from EZ Tech in a few weeks.
+installed and tested.  Below are the instructions for installing R and RStudio. 
+If you do not have install access to your computer (often called "PR access"), 
+you will need to contact your IT representative to have them install it. You can 
+give them a link to this page for instructions.
 
-Once we have the attendees for the workshop finalized, we will collect names and make a single request for everyone to have R, RStudio and Strawberry Perl updated and/or installed.  As soon as we know this has happened, it would be great to make sure it works for everyone.  Follow the instructions below to test your installation.
+#Install R and RStudio
+These instructions are for Windows install. If you have trouble installing R on a Mac or Linux machine, 
+please contact us directly at [gs-w_r_admin@usgs.gov](mailto:gs-w_r_admin@usgs.gov).
+
+## Download and install R
+Go to [CRAN and download](http://cran.rstudio.com/bin/windows/base/) the R installer for Windows. 
+Once the installer downloads, Right-click on it and select "Run as administrator". 
+
+Type in your PR credentials and click yes.
+![Run as admin](/introR/figure/install_open_as_admin.png)
+
+You can click next through the standard dialogs and accept most defaults. But at the destination
+screen, please verify that it is installing it to C:\Program Files\R (version number may vary)
+![Install Destination screen](/introR/figure/install_destination.png)
+
+At the "Select Components" screen, you can accept the default and install both 32-bit and 64-bit versions.
+![Select Architecture](/introR/figure/install_arch_window.png)
+
+At this screen, uncheck 'Create a desktop icon' because non-admin users in Windows will be unable to delete it.
+![Uncheck desktop icon](/introR/figure/install_tasks.png)
+
+
+##Download and install RStudio
+[Download RStudio Desktop](http://www.rstudio.com/products/rstudio/download/)
+
+Double-click the installer. It will ask for your administrator credentials to install. 
+Accept all the default options for the RStudio install.
+![RStudio install screen](/introR/figure/install_rstudio.png)
+
+#Check Install
 
 ## Open RStudio
 Once installed, RStudio should be accessible from the start menu.  Start up RStudio.  Once running it should look something like:
@@ -26,8 +58,12 @@ Click in the window and paste in the code from below:
 version$version.string
 ```
 
-## It should say...
+## Verify your installed R version
+It should be of version 3.1.X (where X can be any number) or higher. 
+3.2.X is fine as well. If you have an older version, please install the newest version 
+using the instructions above.
 
+Here is what my R version looks like.
 ```{r echo=FALSE}
 version$version.string
 ```
