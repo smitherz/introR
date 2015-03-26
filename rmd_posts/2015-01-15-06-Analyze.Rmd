@@ -23,7 +23,8 @@ The second section will run through a fairly quick example of using a package, `
 
 ##Quick Links to Exercises and R code
 - [Lesson 6 R Code](/introR/rmd_posts/2015-01-15-06-Analyze.R): All the code from this post in an R Script.
-- [Exercise 1](#exercise-1): Use EGRET to do explore long-term changes in river water quality
+- [Exercise 1](#exercise-1): Use EGRET to do explore flow history
+- [Exercise 2](#exercise-2): Use EGRET WTDRS to explore long-term changes in river water quality
 
 ##Lesson Goals
 - Understand how to add statistical functionality to R via packages
