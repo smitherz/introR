@@ -1,6 +1,6 @@
 ---
 title: "00 - Before The Workshop"
-author: Jeffrey W. Hollister & Luke Winslwo
+author: Jeffrey W. Hollister & Luke Winslow
 layout: post_page
 ---
 
