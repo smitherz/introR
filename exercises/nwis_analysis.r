@@ -10,17 +10,17 @@
 #Lesson 2: Exercise 2
 #Get the data
 ###############################################################################
-library(EGRET)
-# Flow history analysis
-# Gather discharge data:
-siteNumber <- "01491000" #Choptank River at Greensboro, MD
-startDate <- "" # Get earliest date
-endDate <- "" # Get latest date
-daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
-# Gather site and parameter information:
-# Here user must input some values for
-# the default (interactive=TRUE)
-info <- readNWISInfo(siteNumber,"00060")
+library(dataRetrieval)
+# Gather NWIS data:
+siteListPhos <- readNWISdata(stateCd="OH",parameterCd="00665", 
+                              siteOutput="expanded", 
+                             drainAreaMin=400,siteType="ST",
+                             service="site") 
+
+phosData <- readNWISqw(siteListPhos$site_no, parameterCd = "00665")
+
+head(phosData)
+nrow(phosData)
 
 
 ###############################################################################
