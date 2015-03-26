@@ -23,7 +23,7 @@ The second section will run through a fairly quick example of using a package, `
 
 ##Quick Links to Exercises and R code
 - [Lesson 6 R Code](/introR/rmd_posts/2015-01-15-06-Analyze.R): All the code from this post in an R Script.
-- [Exercise 1](#exercise-1): Use EGRET to do explore flow history
+- [Exercise 1](#exercise-1): Use EGRET to explore flow history
 - [Exercise 2](#exercise-2): Use EGRET WTDRS to explore long-term changes in river water quality
 
 ##Lesson Goals
@@ -75,6 +75,8 @@ plotFourStats(eListMerced, qUnit=3)
 
 What do you notice about changes in maximum, minimum, median, and 7-day minimum?
 
+```{r Exercise1, echo=FALSE}
+```
 ##Exercise 1
 Use the 'plotFourStats' function to look at the spring, summer, and fall seasons. How do those trends compare to what you observed for winter? Hint: use the 'setPA' function. 
 
@@ -112,6 +114,8 @@ WRTDS predicts and explains concentration based on three variables known to affe
 eList <- modelEstimation(eList)
 ```
 
+```{r Exercise2, echo=FALSE}
+```
 ##Exercise 2
 Next, use 'EGRET' functions to take a look at how well WRTDS predicts inorganic N concentration and fluxes. Hint: navigate to p. 33 of the ['EGRET' vignette](http://cran.r-project.org/web/packages/EGRET/vignettes/EGRET.pdf).
 
