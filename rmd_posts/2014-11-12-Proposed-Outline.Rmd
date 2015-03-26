@@ -1,6 +1,6 @@
 ---
 title: "Intro R Workshop Outline"
-authors: Emily Read
+authors: Emily Read and Luke Winslow
 layout: post_page
 ---
 This workshop is designed to provide training and tools to perform common data analysis workflow steps: get -> clean -> explore -> visualize -> analyze -> repeat.   
@@ -9,7 +9,7 @@ The workshop and materials are hands-on and include examples and exercises. Afte
 
 We have borrowed from many sources for this material, most signficantly from Jeffery W. Hollister's IntroR course. Thank you, Jeff, for openly sharing your materials. In addition, material has been drawn from [Software Carpentry](http://software-carpentry.org), [Data Carpentry](http://datacarpentry.org/), and from R seminars given by numerous individuals at the USGS Center for Integrated Data Analytics and the USGS Wisconsin Water Science Center at the 2014-2015 R Lunch Bunch Data Crunch seminar series. We are grateful to all of these sources.
 
-Each step of the workflow has a written component (blog post) describing the topic, a demonstration of example code, and hands-on exercises. The R code found in each blog post is also available as a stand-alone R script of the same name. The blog posts are intended to be used as a reference after the workshop. There is a lesson 
+Each step of the workflow has a written component (blog post) describing the topic, a demonstration of example code, and hands-on exercises. The R code found in each blog post is also available as a stand-alone R script of the same name. The blog posts are intended to be used as a reference after the workshop. 
 
 ##Tentative Schedule
 
@@ -51,17 +51,17 @@ Each step of the workflow has a written component (blog post) describing the top
 - Base statistics
 
 ### 06 - Analyze: Contributed Package (9:30 am - 10:45 am)
-- Contributed Packages - Example with Random Forest
+- Contributed Packages - dataRetrieval and EGRET
 
 #### Break (10:45 am - 11:00 am)
 
 ### 07 - Visualize: Part 1 (11:00 pm - 12:00 pm)
-- `ggplot2`
+- Base R plotting
 
 #### Lunch (12:00 pm - 1:00 pm)
 
 ### 07 - Visualize: Part 2 (1:00 pm - 2:30 pm)
-- `ggplot2`
+- Advanced base R plotting
 
 #### Break (2:30 pm - 2:45 pm)
 
