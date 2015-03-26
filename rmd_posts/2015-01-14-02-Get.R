@@ -179,14 +179,20 @@ first_sheet<-read.csv("example.csv")
 first_sheet
 
 
-## ----dataRetrievalExample------------------------------------------------
-library(dataRetrieval)
-siteNumber <- "01491000" #Choptank River at Greensboro, MD
-startDate <- "" # Get earliest date
-endDate <- "" # Get latest date
-daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
-head(daily)
-
+## ----dataRetrievalExample, eval=FALSE------------------------------------
+## library(dataRetrieval)
+## # Gather NWIS data:
+## siteListPhos <- readNWISdata(stateCd="OH",parameterCd="00665",
+##                               siteOutput="expanded",
+##                              drainAreaMin=400,siteType="ST",
+##                              service="site")
+## 
+## 
+## phosData <- readNWISqw(siteListPhos$site_no, parameterCd = "00665")
+## 
+## head(phosData)
+## 
+## 
 
 ## ----Exercise2, echo=FALSE-----------------------------------------------
 
