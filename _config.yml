@@ -13,7 +13,7 @@ relative_permalinks:  true
 title:            'Introduction to R'
 tagline:          ''
 description:      'This material was developed for two (maybe more) of US EPA, ORDs ecology labs, GED and AED.  Goal is to introduce R through a typical data analysis workflow.'
-url:              http://usepa.github.io/introR
+url:              http://USGS-R.github.io/introR
 baseurl:          /introR
 
 authors:
