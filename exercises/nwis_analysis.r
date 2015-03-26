@@ -10,33 +10,63 @@
 #Lesson 2: Exercise 2
 #Get the data
 ###############################################################################
-wq_url<-"http://water.epa.gov/type/lakes/assessmonitor/lakessurvey/upload/NLA2007_WaterQuality_20091123.csv"
-site_url<-"http://water.epa.gov/type/lakes/assessmonitor/lakessurvey/upload/NLA2007_SampledLakeInformation_20091113.csv"
-nla_wq<-read.csv(wq_url)
-nla_sites<-read.csv(site_url)
-str(nla_wq)
-str(nla_sites)
+library(dataRetrieval)
+# Gather NWIS data:
+siteListPhos <- readNWISdata(stateCd="OH",parameterCd="00665", 
+                              siteOutput="expanded", 
+                             drainAreaMin=400,siteType="ST",
+                             service="site") 
+
+phos_data <- readNWISqw(siteListPhos$site_no, parameterCd = "00665")
+
+str(phos_data)
+head(phos_data)
+nrow(phos_data)
+
+sites <- attr(phosData, "siteInfo")
+variables <- attr(phosData, "variableInfo")
+
 
 ###############################################################################
 #Lesson 3: Exercise 1
 #Subset the data
 ###############################################################################
-library(dplyr)
-nla_sites_subset <- select(nla_sites, SITE_ID, VISIT_NO, SITE_TYPE, LON_DD, 
-                                 LAT_DD, STATE_NAME, WSA_ECO9, NUT_REG, 
-                                 NUTREG_NAME, LAKE_ORIGIN, RT_NLA) %>%
-  filter(VISIT_NO==1 & SITE_TYPE == "PROB_Lake")
 
-nla_wq_subset <- select(nla_wq, SITE_ID, VISIT_NO, SITE_TYPE, TURB, NTL, 
-                              PTL, CHLA, SECMEAN) %>%
-  filter(VISIT_NO==1 & SITE_TYPE == "PROB_Lake")
+library(dplyr)
+#Get average concentration at each site
+#dplyr:
+summaryDplyr <- select(phos_data, site_no, result_va) %>%
+      group_by(site_no) %>%
+      rename(site = site_no, 
+             value=result_va) %>%
+      summarise(mean=mean(value, na.rm=TRUE), 
+                min=min(value, na.rm=TRUE))
+
+
+
+summaryDplyr <- select(phos_data, site_no, result_va, startDateTime) %>%
+  group_by(site_no) %>%
+  rename(site = site_no, 
+         value=result_va,
+         dateTime=startDateTime) %>%
+  summarise(mean=mean(value, na.rm=TRUE), 
+            min=min(value, na.rm=TRUE),
+            start=min(dateTime, na.rm=TRUE),
+            end=max(dateTime, na.rm=TRUE),
+            count=n()) %>%
+  mutate(funky=(mean+min)/count) %>%
+  arrange(desc(count)) %>%
+  filter(count > 10)
+
 
 ###############################################################################
 #Lesson 3: Exercise 2
 #Merging data
 ###############################################################################
-nla_data<-merge(nla_wq_subset,nla_sites_subset,by="SITE_ID",all.x=TRUE)
-nla_data<-na.omit(nla_data)
+site_names = select(sites, site_no, station_nm)
+
+phos_sites <- merge(phos_data,site_names,by="site_no")
+phos_sites <- na.omit(phos_sites)
 
 ###############################################################################
 #Lesson 3: Exercise 3

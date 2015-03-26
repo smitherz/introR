@@ -1,6 +1,6 @@
 ---
 title: "01 - Introduction to R: The basics"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Luke Winslow
 layout: post_page
 ---
 
@@ -250,6 +250,13 @@ library("EGRET")
 
 {% highlight text %}
 ## Warning: package 'EGRET' was built under R version 3.1.3
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Warning: no function found corresponding to methods exports from 'spam'
+## for: 'show'
 {% endhighlight %}
 
 
