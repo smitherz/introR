@@ -10,12 +10,18 @@
 #Lesson 2: Exercise 2
 #Get the data
 ###############################################################################
-wq_url<-"http://water.epa.gov/type/lakes/assessmonitor/lakessurvey/upload/NLA2007_WaterQuality_20091123.csv"
-site_url<-"http://water.epa.gov/type/lakes/assessmonitor/lakessurvey/upload/NLA2007_SampledLakeInformation_20091113.csv"
-nla_wq<-read.csv(wq_url)
-nla_sites<-read.csv(site_url)
-str(nla_wq)
-str(nla_sites)
+library(EGRET)
+# Flow history analysis
+# Gather discharge data:
+siteNumber <- "01491000" #Choptank River at Greensboro, MD
+startDate <- "" # Get earliest date
+endDate <- "" # Get latest date
+daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
+# Gather site and parameter information:
+# Here user must input some values for
+# the default (interactive=TRUE)
+info <- readNWISInfo(siteNumber,"00060")
+
 
 ###############################################################################
 #Lesson 3: Exercise 1
