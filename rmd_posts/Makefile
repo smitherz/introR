@@ -1,9 +1,11 @@
 MDS := $(patsubst %.Rmd,%.md,$(wildcard *.Rmd))
 POSTDIR := ../_posts
 
-all: $(MDS)
+unexport HOME
 
-%.md: %.Rmd    
+all: $(MDS) 
+
+%.md: %.Rmd
 	Rscript -e "source('knit_it.R'); knit_it('$<')"
 	cp $@ ../_posts/.
 
