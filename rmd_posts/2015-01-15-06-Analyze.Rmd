@@ -1,6 +1,6 @@
 ---
 title: "06 - Analyze: Packages"
-author: Jeffrey W. Hollister
+author: Emily Read
 layout: post_page
 ---
 
@@ -28,7 +28,7 @@ library("XML")
 library("RCurl")
 ```
 
-The second section will run through a fairly quick example of using a package, `randomForest` for some analysis.  I've included this section just to show how (relatively) trivial it is to add an advanced capability to R via packages.
+The second section will run through a fairly quick example of using a package, `EGRET` for some analysis.  I've included this section just to show how (relatively) trivial it is to add an advanced capability to R via packages.
 
 ##Quick Links to Exercises and R code
 - [Lesson 6 R Code](/introR/rmd_posts/2015-01-15-06-Analyze.R): All the code from this post in an R Script.
@@ -37,6 +37,9 @@ The second section will run through a fairly quick example of using a package, `
 ##Lesson Goals
 - Understand how to add statistical functionality to R via packages
 - See some of the best ways to learn a new package
+
+The R Exploration and Graphics for RivEr Trends (EGRET) package was developed by USGS scientists Robert Hirsch and Laura DeCicco for the analysis of long-term water quality trends in rivers. The package integrates all of the steps a scientist needs to take when doing long term analysis: 
+
 
 Random forests were developed by Leo Breiman at UC-Berkely ([Breiman 2001](http://dx.doi.org/10.1023/A:1010933404324)).  At their simplest, a random forest is a collection (or ensemble) of classification (or regression) trees.  Each tree is developed based on a resampling of both the data and variables.  They have been shown to have superior predictive perfomance as well as to be robust to violation of the standard suite of assumptions that often plague other approaches.  In my opinion, if you want to learn one machine learning approach, this is it.  If you want to read more, a few good references are:
 
