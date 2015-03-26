@@ -16,9 +16,18 @@ description:      'This material was developed for two (maybe more) of US EPA, O
 url:              http://usepa.github.io/introR
 baseurl:          /introR
 
-author:
-  name:           'Jeffrey W. Hollister'
-  url:            https://twitter.com/jhollist
+authors:
+  hollister:
+    name:           Jeffrey W. Hollister
+    twitter:            jhollist
+  winslow:
+    name:           Luke A. Winslow
+    github:         lawinslow
+    email:          lwinslow@usgs.gov
+  eread:
+    name:           Emily Read
+    github:         eread-USGS
+    email:          eread@usgs.gov
 
 paginate:         15
 
