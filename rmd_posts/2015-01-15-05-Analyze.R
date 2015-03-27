@@ -1,19 +1,14 @@
-
-
-
 ## ----ttest_examp---------------------------------------------------------
 x<-rnorm(30,mean=3,sd=2)
 y<-rnorm(30,mean=10,sd=5)
 xy_tt<-t.test(x,y)
 xy_tt
 
-
 ## ----ttest_formula_examp-------------------------------------------------
 #Lets pick another dataset, ToothGrowth.
 #Looking at diff in tooth length by groups specified in supp
 rbind(head(ToothGrowth),tail(ToothGrowth))
 t.test(ToothGrowth$len~ToothGrowth$supp)
-
 
 ## ----corr_examp,message=FALSE,warning=FALSE------------------------------
 #A simple correlation
@@ -27,7 +22,6 @@ library(dplyr)
 select(iris,-Species) %>% 
   cor()
 
-
 ## ----lm_examp------------------------------------------------------------
 lm(Ozone~Temp,data=airquality)
 #Not much info, so save to object and use summary
@@ -37,7 +31,16 @@ summary(lm_aq1)
 lm_aq2<-lm(Ozone~Temp+Wind+Solar.R,data=airquality)
 summary(lm_aq2)
 
-
 ## ----Exercise1, echo=FALSE-----------------------------------------------
 
+## ----Choptank_lm_example-------------------------------------------------
+#Choptank River at Greensboro, MD:
+siteNumber <- "01491000"
+startDate <- "1979-10-01"
+endDate <- "2011-09-30"
+param<-"00631"
+Daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
+INFO<- readNWISInfo(siteNumber,param,interactive=FALSE)
+INFO$shortName <- "Choptank River"
+Sample <- readNWISSample(siteNumber,param,startDate,endDate)
 
