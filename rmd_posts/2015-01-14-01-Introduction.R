@@ -21,7 +21,7 @@ install.packages("dataRetrieval")
 install.packages("EGRET")
 
 #You can also put more than one in like
-install.packages(c("dplyr","rLakeAnalyzer"))
+install.packages(c("dplyr","ggplot2"))
 
 ## ----load_package--------------------------------------------------------
 #Add libraries to your R Session
