@@ -171,7 +171,7 @@ install.packages("dataRetrieval")
 ## package 'dataRetrieval' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpWyy98T\downloaded_packages
+## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpktG8Ok\downloaded_packages
 {% endhighlight %}
 
 
@@ -193,14 +193,14 @@ install.packages("EGRET")
 ## package 'EGRET' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpWyy98T\downloaded_packages
+## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpktG8Ok\downloaded_packages
 {% endhighlight %}
 
 
 
 {% highlight r %}
 #You can also put more than one in like
-install.packages(c("dplyr","rLakeAnalyzer"))
+install.packages(c("dplyr","ggplot2"))
 {% endhighlight %}
 
 
@@ -213,16 +213,7 @@ install.packages(c("dplyr","rLakeAnalyzer"))
 
 
 {% highlight text %}
-## Warning: package 'dplyr' is in use and will not be installed
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## package 'rLakeAnalyzer' successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpWyy98T\downloaded_packages
+## Warning: packages 'dplyr', 'ggplot2' are in use and will not be installed
 {% endhighlight %}
 
 ###Loading packages
@@ -250,13 +241,6 @@ library("EGRET")
 
 {% highlight text %}
 ## Warning: package 'EGRET' was built under R version 3.1.3
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Warning: no function found corresponding to methods exports from 'spam'
-## for: 'show'
 {% endhighlight %}
 
 
