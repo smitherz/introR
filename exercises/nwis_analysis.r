@@ -1,30 +1,24 @@
 ###############################################################################
 #Script used during intro R workshop
-#12/18/14
-#written by: jwh
-#Walks through a typical data analysis workflow in R with some of the NLA
-#data
+#3/28/2015
+#written by: jwh, lwinslow, eread
+#Walks through a typical data analysis workflow in R with some of the USGS data
 ###############################################################################
 
 ###############################################################################
 #Lesson 2: Exercise 2
 #Get the data
 ###############################################################################
-library(dataRetrieval)
-# Gather NWIS data:
-siteListPhos <- readNWISdata(stateCd="OH",parameterCd="00665", 
-                              siteOutput="expanded", 
-                             drainAreaMin=400,siteType="ST",
-                             service="site") 
 
-phos_data <- readNWISqw(siteListPhos$site_no, parameterCd = "00665")
+gages_sites = read.csv('http://usgs-r.github.io/introR/rmd_posts/all_gages_ii_data/conterm_basinid.csv')
 
-str(phos_data)
-head(phos_data)
-nrow(phos_data)
+gages_cover = read.csv('http://lawinslow.github.io/introR/rmd_posts/all_gages_ii_data/conterm_lc06_basin.csv')
 
-sites <- attr(phosData, "siteInfo")
-variables <- attr(phosData, "variableInfo")
+str(gages_sites)
+head(gages_sites)
+nrow(gages_sites)
+
+str(gages_cover)
 
 
 ###############################################################################
@@ -33,65 +27,46 @@ variables <- attr(phosData, "variableInfo")
 ###############################################################################
 
 library(dplyr)
-#Get average concentration at each site
+#Subset the data based on instructions
 #dplyr:
-summaryDplyr <- select(phos_data, site_no, result_va) %>%
-      group_by(site_no) %>%
-      rename(site = site_no, 
-             value=result_va) %>%
-      summarise(mean=mean(value, na.rm=TRUE), 
-                min=min(value, na.rm=TRUE))
 
+gages_cover_subset = select(gages_cover, STAID, DEVNLCD06, FORESTNLCD06, BARRENNLCD06, PASTURENLCD06, CROPSNLCD06)
 
+gages_sites_subset = select(gages_sites, STAID, STANAME, DRAIN_SQKM, LAT_GAGE, LNG_GAGE, STATE, COUNTYNAME_SITE)
 
-summaryDplyr <- select(phos_data, site_no, result_va, startDateTime) %>%
-  group_by(site_no) %>%
-  rename(site = site_no, 
-         value=result_va,
-         dateTime=startDateTime) %>%
-  summarise(mean=mean(value, na.rm=TRUE), 
-            min=min(value, na.rm=TRUE),
-            start=min(dateTime, na.rm=TRUE),
-            end=max(dateTime, na.rm=TRUE),
-            count=n()) %>%
-  mutate(funky=(mean+min)/count) %>%
-  arrange(desc(count)) %>%
-  filter(count > 10)
+gages_sites_nm = filter(gages_sites_subset, STATE=="NM")
 
 
 ###############################################################################
 #Lesson 3: Exercise 2
 #Merging data
 ###############################################################################
-site_names = select(sites, site_no, station_nm)
+gages_data = left_join(gages_sites_nm, gages_cover_subset)
 
-phos_sites <- merge(phos_data,site_names,by="site_no")
-phos_sites <- na.omit(phos_sites)
+#remove rows with any NAs if there are any 
+gages_data <- na.omit(gages_data)
 
 ###############################################################################
 #Lesson 3: Exercise 3
 #Reshape and Modify data
 ###############################################################################
-group_by(nla_data,LAKE_ORIGIN) %>%
-  summarize(mean(NTL),
-            mean(PTL),
-            mean(CHLA),
-            mean(SECMEAN),
-            mean(TURB))
+gages_cover_means = group_by(gages_data, COUNTYNAME_SITE)  %>% 
+                summarize(mean(DEVNLCD06), 
+                    mean(FORESTNLCD06), 
+                    mean(BARRENNLCD06), 
+                    mean(PASTURENLCD06), 
+                    mean(CROPSNLCD06))
+                    
+gages_cover_total = group_by(gages_data, COUNTYNAME_SITE)  %>% 
+                transmute(TOTAL = DEVNLCD06+FORESTNLCD06+BARRENNLCD06+PASTURENLCD06+CROPSNLCD06) %>%
+                summarize(mean(TOTAL))
 
-group_by(nla_data, WSA_ECO9) %>%
-  summarize(mean(TURB), 
-            mean(NTL), 
-            mean(PTL), 
-            mean(CHLA), 
-            mean(SECMEAN))
-
-summarize(nla_data, 
-           mean(TURB), 
-           mean(NTL), 
-           mean(PTL), 
-           mean(CHLA), 
-           mean(SECMEAN))
+gages_cover_all_means = summarize(gages_data, 
+        mean(DEVNLCD06), 
+        mean(FORESTNLCD06), 
+        mean(BARRENNLCD06), 
+        mean(PASTURENLCD06), 
+        mean(CROPSNLCD06))
 
 ###############################################################################
 #Lesson 4: Exercise 1
