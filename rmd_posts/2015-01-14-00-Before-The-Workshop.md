@@ -67,7 +67,7 @@ using the instructions above.
 Here is what my R version looks like.
 
 {% highlight text %}
-## [1] "R version 3.1.0 (2014-04-10)"
+## [1] "R version 3.0.2 (2013-09-25)"
 {% endhighlight %}
 
 

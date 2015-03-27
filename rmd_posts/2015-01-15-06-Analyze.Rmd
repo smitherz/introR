@@ -1,107 +1,125 @@
 ---
 title: "06 - Analyze: Packages"
-author: Jeffrey W. Hollister
+author: Emily Read
 layout: post_page
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
 options(repos="http://cran.rstudio.com/")
-if(!require("ggplot2")){
-  install.packages("ggplot2")
+if(!require("EGRET")){
+  install.packages("EGRET")
+
 }
-if(!require("dplyr")){
-  install.packages("dplyr")
-}
-if(!require("randomForest")){
-  install.packages("randomForest")
-}
+
 if(!require("XML")){
   install.packages("XML")
-}
-if(!require("RCurl")){
-  install.packages("RCurl")
-}
 
-library("ggplot2")
-library("dplyr")
+}
 library("XML")
-library("RCurl")
+
 ```
 
-The second section will run through a fairly quick example of using a package, `randomForest` for some analysis.  I've included this section just to show how (relatively) trivial it is to add an advanced capability to R via packages.
+The second section will run through a fairly quick example of using a package, `EGRET` for some analysis.  I've included this section just to show how (relatively) trivial it is to add an advanced capability to R via packages.
 
 ##Quick Links to Exercises and R code
 - [Lesson 6 R Code](/introR/rmd_posts/2015-01-15-06-Analyze.R): All the code from this post in an R Script.
-- [Exercise 1](#exercise-1): Use random forests to predict NLA reference class. 
+- [Exercise 1](#exercise-1): Use EGRET to explore flow history
+- [Exercise 2](#exercise-2): Use EGRET WRTDS to explore long-term changes in river water quality
 
 ##Lesson Goals
 - Understand how to add statistical functionality to R via packages
 - See some of the best ways to learn a new package
 
-Random forests were developed by Leo Breiman at UC-Berkely ([Breiman 2001](http://dx.doi.org/10.1023/A:1010933404324)).  At their simplest, a random forest is a collection (or ensemble) of classification (or regression) trees.  Each tree is developed based on a resampling of both the data and variables.  They have been shown to have superior predictive perfomance as well as to be robust to violation of the standard suite of assumptions that often plague other approaches.  In my opinion, if you want to learn one machine learning approach, this is it.  If you want to read more, a few good references are:
+The R Exploration and Graphics for RivEr Trends (EGRET) package was developed by USGS scientists Robert Hirsch and Laura DeCicco for the analysis of long-term water quality trends in rivers. The package integrates all of the steps a scientist needs to take when doing long term analysis: gather data from multiple sources, organize it, analyze for long-term trends, and create summary graphics for the data analysis. The Weighted Regression on Time, Discharge, and Season (WRTDS) is the method used to assess long-term changes in water quality concentrations and fluxes, and accounts for long-term changes in flow. A publication on the analytical method can be found [here](http://pubs.usgs.gov/tm/04/a10/pdf/tm4A10.pdf), and the package on R, including a vignette with examples, can be found [here](http://cran.r-project.org/web/packages/EGRET/index.html). You can also use the R help function to search within RStudio on this package and its functions. 'EGRET' uses the 'dataRetrieval' package to access data from EPA STORET and USGS NWIS. All of the examples used in this lesson are drawn from the 'EGRET' package vignette; many thanks to Laura DeCicco and Bob Hirsch for providing such excellent examples. 
 
-- [Cutler et. al. (2007):Random forests for classification in ecology](http://dx.doi.org/10.1890/07-0539.1)
-- [Fern´andez-Delgado et al. 2014: Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?](http://jmlr.org/papers/volume15/delgado14a/delgado14a.pdf) (HT:[Simply Statistics](http://simplystatistics.org/2014/12/17/a-non-comprehensive-list-of-awesome-things-other-people-did-in-2014/))
-
-
-The implementation in R is accessed through the `randomForest` package.  Let's install this, load it up and start to look around.
+The implementation in R is accessed through the `EGRET` package.  If you have not already, let's install this, load it up and start to look around.
 
 ```{r rf_actual_install, echo=FALSE, include=FALSE, purl=FALSE}
-if(!require("randomForest")){
-  install.packages("randomForest")
+if(!require("EGRET")){
+  install.packages("EGRET")
 }
-library("randomForest")
+library("EGRET")
 ```
 
 ```{r rf_install, eval=FALSE}
-install.packages("randomForest")
-library("randomForest")
-help(package="randomForest")
+install.packages("EGRET")
+library("EGRET")
+help(package="EGRET")
 ```
 
-There are quite a few functions included with this package, but the one we are most interested in is the workhorse `randomForest()` function.  For our examples we will look at classification trees.  The bare minimum we need for this to work are just our independent (x) and dependent variables (y).  Let's see if we can predict iris species from the morphology measurements...
+#Flow history
+There are quite a few functions included with this package. First let's take a look at the flow history for a site in California with an observational record of more than 100 years:
 
-```{r rf_example}
-rf_x<-select(iris,Petal.Width, Petal.Length, Sepal.Width, Sepal.Length)
-rf_y<-select(iris,Species)
-rf_y<-rf_y$Species
-iris_rf<-randomForest(x=rf_x,y=rf_y)
-iris_rf
+```{r flow_history_example}
+# Merced River at Happy Isles Bridge, CA:
+siteNumber<-"11264500"
+Daily <-readNWISDaily(siteNumber,"00060",startDate="",endDate="")
+INFO <- readNWISInfo(siteNumber,"",interactive=FALSE)
+INFO$shortName <- "Merced River at Happy Isles Bridge, CA"
+eListMerced <- as.egret(INFO, Daily, NA, NA)
+plotFlowSingle(eListMerced, istat=5)
+# Then, we can run the same function, but first set
+# the pa to start in December and only run for 3 months.
+eListMerced <- setPA(eListMerced,paStart=12,paLong=3)
+plotFlowSingle(eListMerced,istat=5,qMax=200)
+
 ```
 
-Can we predict species, well, I'd say so!  
+The two plots produced here show us that although annual mean discharge does not have a strong trend at this location over the past century, discharge during the winter season appears to be increasing. This may be related to changing patterns in the fraction of precipitation that falls in this region as snow versus rain. 
 
-We can also call `randomForest()` using a formula for a data frame like,
+Next, let's take a closer look at the distribution of discharge at this site: 
 
-```{r rf_form_examp}
-iris_rf2<-randomForest(Species~.,data=iris)
-iris_rf2
+```{r plotFourStats_example}
+plotFourStats(eListMerced, qUnit=3)
 ```
 
-The only thing we haven't seen before here is the ".".  That indicates all the other variables in the data frame.  It is just a shortcut and you could explicitly name the variables to use.
-
-Lastly, we can look at a couple of plots that tell us a little bit more about the model with some of the plotting functions that come with randomForest.
-
-```{r rf_plots}
-#Error vs num of trees
-plot(iris_rf2)
-#Variable Importance
-varImpPlot(iris_rf2)
-```
-
-The default plot shows error for the total model and and each of the classes as a function of the number of trees. Variable importance is plotting the decrease in Gini as each variable is added to the model.  
-
-For the basics, that is it!  Let's try it now on the NLA data.
+What do you notice about changes in maximum, minimum, median, and 7-day minimum?
 
 ```{r Exercise1, echo=FALSE}
 ```
-
 ##Exercise 1
-For this exercise we are going to implement random forest and try to predict the NLA reference class from the water quality measurements.
+Use the 'plotFourStats' function to look at the spring, summer, and fall seasons. How do those trends compare to what you observed for winter? Hint: use the 'setPA' function. 
 
-1. Add a new section to the script
-2. Build your model to predict RT_NLA.  You may specify the model however makes the most sense
-3. Print to the screen your result, plot the error and variable importance. When finished put a green sticky up and we will come around to check.
+
+## Water quality analysis
+
+Next, let's consider water quality without using WRTDS:
+
+
+
+```{r Choptank_noWRTDS}
+#Choptank River at Greensboro, MD:
+siteNumber <- "01491000"
+startDate <- "1979-10-01"
+endDate <- "2011-09-30"
+param<-"00631"
+Daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
+INFO<- readNWISInfo(siteNumber,param,interactive=FALSE)
+INFO$shortName <- "Choptank River"
+Sample <- readNWISSample(siteNumber,param,startDate,endDate)
+eList <- mergeReport(INFO, Daily, Sample)
+```
+
+Now the analysis is done, but we still need to do some plotting. 
+
+```{r Choptank_noWRTDS_plotexample}
+multiPlotDataOverview(eList, qUnit=1)
+```
+
+This four panel plot shows the relationship between discharge, concentration of inorganic N, and season. Upon examination of the lower left hand plot, you may notice seasonal changes in the distribution of inorganic N observed. Next, let's use WRTDS to look further into seasonal changes. 
+
+WRTDS predicts and explains concentration based on three variables known to affect it: time, season, and discharge. To carry out WRTDS on the Choptank River eList we created above, we'll use the 'modelEstimation' function:
+
+```{r Choptank_WRTDS}
+eList <- modelEstimation(eList)
+```
+
+```{r Exercise2, echo=FALSE}
+```
+##Exercise 2
+Next, use 'EGRET' functions to take a look at how well WRTDS predicts inorganic N concentration and fluxes. Hint: navigate to p. 33 of the ['EGRET' vignette](http://cran.r-project.org/web/packages/EGRET/vignettes/EGRET.pdf).
+
+
 
 ##Learning a New Package
 

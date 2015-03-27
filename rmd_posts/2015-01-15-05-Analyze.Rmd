@@ -1,20 +1,18 @@
 ---
 title: "05 - Analyze: Base"
-author: Jeffrey W. Hollister
+author: Emily Read
 layout: post_page
 ---
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
 options(repos="http://cran.rstudio.com/")
-if(!require("ggplot2")){
-  install.packages("ggplot2")
-}
+
 if(!require("dplyr")){
   install.packages("dplyr")
 }
 if(!require("randomForest")){
   install.packages("randomForest")
 }
-library("ggplot2")
+
 library("dplyr")
 ```
 
@@ -22,7 +20,7 @@ The focus of this workshop hasn't really been statistics, its been more about R,
 
 ##Quick Links to Exercises and R code
 - [Lesson 5 R Code](/introR/rmd_posts/2015-01-15-05-Analyze.R): All the code from this post in an R Script.
-- [Exercise 1](#exercise-1): Run some basic statistical test and build a simple model with the NLA data
+- [Exercise 1](#exercise-1): Run some basic statistical test and build a simple model with USGS data
 
 ##Lesson Goals
 - Conduct basic statistical analyses with base R
@@ -90,8 +88,22 @@ All of your standard modelling approaches (and then some) are available in R inc
 ```
 
 ##Excercise 1
-For this exercise, let's start to look at some of the statistical tests and relationships in the NLA data.
+For this exercise, let's start to look at some of the statistical tests and relationships in some USGS data.
 
-1. First, lets take a look at the man made and natural lakes.  Add a section to your script that tests for a difference in the mean value of TURB, NTL, PTL, CHLA, and SECMEAN between man made and natural lakes.  For this we will have the script save each test to a new object and print the results to the screen.
+Start by using 'dataRetrieval' to gather data from NWIS:
+
+```{r Choptank_lm_example}
+#Choptank River at Greensboro, MD:
+siteNumber <- "01491000"
+startDate <- "1979-10-01"
+endDate <- "2011-09-30"
+param<-"00631"
+Daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
+INFO<- readNWISInfo(siteNumber,param,interactive=FALSE)
+INFO$shortName <- "Choptank River"
+Sample <- readNWISSample(siteNumber,param,startDate,endDate)
+```
+
+1. First, lets take a look at the relationship between discharge and inorganic N.  Add a section to your script that tests for a difference in the mean value of TURB, NTL, PTL, CHLA, and SECMEAN between man made and natural lakes.  For this we will have the script save each test to a new object and print the results to the screen.
 
 2. Next, lets build some linear models that build a linear model to be used to predict CHLA.  Again save your model to an object and print the summary of that model to the screen
