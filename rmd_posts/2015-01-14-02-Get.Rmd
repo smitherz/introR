@@ -364,7 +364,7 @@ Now, open the example in Excel, and go to File > Save As. Select CSV in the drop
 
 ![How to save csv](/introR/figure/excel_to_csv.png)
 
-```{r excel_to_csv_examp}
+```{r excel_to_csv_examp, eval=FALSE}
 
 first_sheet<-read.csv("example.csv")
 #Did it work?

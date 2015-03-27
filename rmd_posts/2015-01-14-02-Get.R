@@ -172,12 +172,12 @@ str(web_df)
 dim(web_df)
 summary(web_df)
 
-## ----excel_to_csv_examp--------------------------------------------------
-
-first_sheet<-read.csv("example.csv")
-#Did it work?
-first_sheet
-
+## ----excel_to_csv_examp, eval=FALSE--------------------------------------
+## 
+## first_sheet<-read.csv("example.csv")
+## #Did it work?
+## first_sheet
+## 
 
 ## ----dataRetrievalExample, eval=FALSE------------------------------------
 ## library(dataRetrieval)
