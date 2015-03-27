@@ -389,7 +389,6 @@ phosData <- readNWISqw(siteListPhos$site_no, parameterCd = "00665")
 
 head(phosData)
 
-
 ```
 
 So now we have a basic feel on how to work in R, how data is dealt with, and how to pull data from a file into R.  Next we are going to practice some of these skills.
@@ -402,9 +401,10 @@ From here on out I hope to have these exercises begin to build on each other. We
 
 1. Create a new script in RStudio.  Name it "usgs_analysis.R"
 2. As you write the script comment as you go.
-3. Add commands shown above to read NWIS phosphorus data to your script. These create two variables. `siteListPhos` and `phosData`. 
-4. Add commands to your script that will provides details on the structure (hint: `str`) of each newly created data frame
-5. Run the script and make sure it doesn't throw any errors and you do in fact get the two data frames.
-6. If you still have some time, explore the data frames using some of the commands we covered.  This part does not need to be included in the script.
+3. Add commands to create two data frames: One named `gages_sites` that contains all the data in the [conterm_basinid.csv](/introR/rmd_posts/all_gages_ii_data/conterm_basinid.csv) file, and another named `gages_cover` that contains all the data in the [conterm_lc06_basin.csv](/introR/rmd_posts/all_gages_ii_data/conterm_lc06_basin.csv) file. 
+4. Add commands to your script that will provides details on the structure (hint: `str`) of each newly created data frame.
+5. Take a look at the variable description table [here on github](https://github.com/USGS-R/introR/blob/gh-pages/rmd_posts/all_gages_ii_data/variable_descriptions.csv) to understand the column headers.
+6. Run the script and make sure it doesn't throw any errors and you do in fact get the two data frames.
+7. If you still have some time, explore the data frames using some of the commands we covered.  This part does not need to be included in the script.
 
 

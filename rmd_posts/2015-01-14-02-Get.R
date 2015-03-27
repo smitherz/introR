@@ -192,7 +192,6 @@ summary(web_df)
 ## 
 ## head(phosData)
 ## 
-## 
 
 ## ----Exercise2, echo=FALSE-----------------------------------------------
 
