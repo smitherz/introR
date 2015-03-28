@@ -175,7 +175,7 @@ is.na()#Will tell you if a value is NA
 
 ```{r}
 0/0
-NaN.
+NaN
 ```
 
 ###Data Structures
