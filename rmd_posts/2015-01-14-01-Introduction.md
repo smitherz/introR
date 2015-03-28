@@ -1,15 +1,17 @@
 ---
 title: "01 - Introduction to R: The basics"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Luke Winslow
 layout: post_page
 ---
 
 
 
-Over the course of the next two days we are going to walk through a typical data analysis workflow in R.  But, with this first lesson we are going to focus on making sure everything is working and getting some basic orientation in R.  The real fun will start in the lessons to come.  
+Over the course of the next 2.5 days we are going to walk through a typical data analysis workflow in R. But, with this first lesson we are going to focus on making sure everything is working and getting some basic orientation in R.  The real fun will start in the lessons to come.  
 
 ##Quick Links to Exercises and R code
-My goal is to have this workshop be as hands-on as possible.  As such, there are exercises through out.  For each lesson, I will provide a list of links near the top of the post so that you can skip all the prose and jump straight to the lessons.  So, here are the links for Lesson 1.
+My goal is to have this workshop be as hands-on and itneractive as possible. I encourage you to get to know the people sitting next to you. Throughout the workshop, I encourage you to ask questions and get help from those around you. 
+
+To be hands-on, there are exercises throughout. For each lesson, I will provide a list of links near the top of the post so that you can skip all the prose and jump straight to the lessons.  So, here are the links for Lesson 1.
 
 - [Lesson 1 R Code](/introR/rmd_posts/2015-01-14-01-Introduction.R): All the code from this post in an R Script.
 - [Exercise 1](#exercise-1): RStudio Introduction.
@@ -49,7 +51,7 @@ This exercise will make sure R and RStudio are working and that you can get arou
 
 2. Take a few minutes to look around RStudio.  Find the Console Pane. Find Global and Project Options (hint: look in Tools).  Look at the Environment, History Pane.  Look at the Files, Plots, Packages ... pane.
 
-3. Create a new project.  Name it "gedr_workshop".  We will use this for the rest of the workshop.
+3. Create a new project.  Name it "usgs_workshop".  We will use this for the rest of the workshop.
 
 4. Create a new "R Script"" in the Source Pane, save that file into your newly created project and name it "lesson1.R". 
 
@@ -143,8 +145,8 @@ A few side notes.  The `#` indicates a comment.  You can put whatever else you'd
 ##Using packages
 The base install of R is quite powerful, but you will soon have a need or desire to go beyond this.  Packages provide this ability.  They are a standardized method for extending R with new methods, techniques, and programming functionality.  There is a lot to say about packages regarding finding them, using them, etc., but for now let's focus just on the basics.  
 
-###CRAN
-One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.
+###CRAN & GRAN
+One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later). For some USGS specific packages that aren't of interest to the public, we have created [GRAN, the Geological survey R Archive Network](http://owi.usgs.gov/R/gran.html). 
 
 ###Installing packages
 When a package gets installed, that means the source (or packaged binary for Windows) is downloaded and put into your library.  A default library location is set for you so no need to worry about that.  In fact on Windows most of this is pretty automatic.  Let's give it a shot.
@@ -152,117 +154,147 @@ When a package gets installed, that means the source (or packaged binary for Win
 
 
 {% highlight r %}
-#Install dplyr and ggplot2
-install.packages("ggplot2")
+#Install dataRetrieval and EGRET
+install.packages("dataRetrieval")
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Installing package into '/data/jhollist/R/x86_64-redhat-linux-gnu-library/3.1'
+## Installing package into 'C:/Users/lwinslow/Documents/R/win-library/3.1'
 ## (as 'lib' is unspecified)
 {% endhighlight %}
 
 
 
 {% highlight text %}
+## package 'dataRetrieval' successfully unpacked and MD5 sums checked
 ## 
-## The downloaded source packages are in
-## 	'/tmp/RtmpFFMvXl/downloaded_packages'
+## The downloaded binary packages are in
+## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpktG8Ok\downloaded_packages
 {% endhighlight %}
 
 
 
 {% highlight r %}
-install.packages("dplyr")
+install.packages("EGRET")
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Installing package into '/data/jhollist/R/x86_64-redhat-linux-gnu-library/3.1'
+## Installing package into 'C:/Users/lwinslow/Documents/R/win-library/3.1'
 ## (as 'lib' is unspecified)
 {% endhighlight %}
 
 
 
 {% highlight text %}
+## package 'EGRET' successfully unpacked and MD5 sums checked
 ## 
-## The downloaded source packages are in
-## 	'/tmp/RtmpFFMvXl/downloaded_packages'
+## The downloaded binary packages are in
+## 	C:\Users\lwinslow\AppData\Local\Temp\1\RtmpktG8Ok\downloaded_packages
 {% endhighlight %}
 
 
 
 {% highlight r %}
 #You can also put more than one in like
-install.packages(c("randomForest","formatR"))
+install.packages(c("dplyr","ggplot2"))
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Installing packages into '/data/jhollist/R/x86_64-redhat-linux-gnu-library/3.1'
+## Installing packages into 'C:/Users/lwinslow/Documents/R/win-library/3.1'
 ## (as 'lib' is unspecified)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## 
-## The downloaded source packages are in
-## 	'/tmp/RtmpFFMvXl/downloaded_packages'
+## Warning: packages 'dplyr', 'ggplot2' are in use and will not be installed
 {% endhighlight %}
 
 ###Loading packages
-One source of confusion that many have is when they cannot access a package that they just installed. This is because getting to this point requires an extra step, loading (or attaching) the package.   
+One source of confusion that many have is when they cannot access functions from a package that they just installed. This is because getting to this point requires an extra step, loading (or attaching) the package. 
 
 
 {% highlight r %}
 #Add libraries to your R Session
-library("ggplot2")
+library("dataRetrieval")
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Loading required package: methods
+## Warning: package 'dataRetrieval' was built under R version 3.1.3
 {% endhighlight %}
 
 
 
 {% highlight r %}
-library("dplyr")
+library("EGRET")
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
+## Warning: package 'EGRET' was built under R version 3.1.3
 {% endhighlight %}
 
 
 
 {% highlight r %}
 #You can also access functions without loading by using package::function
-randomForest::randomForest
+dataRetrieval::readNWISdata
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## function (x, ...) 
-## UseMethod("randomForest")
-## <environment: namespace:randomForest>
+## function (service = "dv", ...) 
+## {
+##     matchReturn <- list(...)
+##     match.arg(service, c("dv", "iv", "gwlevels", "site", "uv"))
+##     if (service == "uv") {
+##         service <- "iv"
+##     }
+##     if (length(service) > 1) {
+##         stop("Only one service call allowed.")
+##     }
+##     values <- sapply(matchReturn, function(x) URLencode(as.character(paste(eval(x), 
+##         collapse = ",", sep = ""))))
+##     names(values)[names(values) == "startDate"] <- "startDT"
+##     names(values)[names(values) == "endDate"] <- "endDT"
+##     names(values)[names(values) == "siteNumber"] <- "sites"
+##     names(values)[names(values) == "siteNumbers"] <- "sites"
+##     urlCall <- paste(paste(names(values), values, sep = "="), 
+##         collapse = "&")
+##     format <- "waterml,1.1"
+##     baseURL <- "http://waterservices.usgs.gov/nwis/"
+##     if (service == "iv") {
+##         baseURL <- "http://nwis.waterservices.usgs.gov/nwis/"
+##     }
+##     if (service == "site") {
+##         format <- "rdb"
+##     }
+##     baseURL <- paste0(baseURL, service, "/?format=", format, 
+##         "&")
+##     urlCall <- paste0(baseURL, urlCall)
+##     if (service == "site") {
+##         retval <- importRDB1(urlCall, asDateTime = FALSE, qw = FALSE)
+##     }
+##     else {
+##         retval <- importWaterML1(urlCall, asDateTime = ("iv" == 
+##             service))
+##         if ("dv" == service) {
+##             retval$dateTime <- as.POSIXct(retval$dateTime)
+##         }
+##     }
+##     return(retval)
+## }
+## <environment: namespace:dataRetrieval>
 {% endhighlight %}
 
 You will often see people use `require()` to load a package. It is better form to not do this. For a more detailed explanation of why `library()` and not `require()` see [Yihui Xie's post on the subject](http://yihui.name/en/2014/07/library-vs-require/.)
@@ -302,6 +334,15 @@ apropos("print") #Returns all available functions with "print" in the name
 ??print #Shortcut, but also searches demos and vignettes in a formatted page
 {% endhighlight %}
 
+One nice way to explore the features of a package is to see a list of all the functions. In the lower right-hand corner, there is a "Packages" tab. From this tab, if you click on the name of a package, you will get a list of all the documentation for that package. 
+
+![Package List](introR/figure/rstudio_packages.png)
+
+This is very helpful if you've forgotten the name of a function or just want to see a quick overview of everything a package has to offer. 
+
+![Package List](introR/figure/rstudio_dataRetrieval.png)
+
+
 ###Official R Resources
 In addition to help from within R itself, CRAN and the R-Project have many resources available for support.  Two of the most notable are the mailing lists and the [task views](http://cran.r-project.org/web/views/).
 
@@ -334,7 +375,7 @@ For this second exercise we are going to get used to using some basic functions,
 2. Use the `print` function to print something to the screen.
 3. Combine `mean` and `rnorm` to return the mean value of a set of random numbers.
 4. Open up a [task view](http://cran.r-project.org/web/views/) of your choosing.  Select a package and install it. 
-5. Load the package into your library.
+5. Load the package into R.
 6. Open the help for the package.
 7. Save all these functions inside your "lesson1.R" script.  Run the script using the "Run" button at the top right of the editor.
 

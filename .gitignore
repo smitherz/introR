@@ -3,3 +3,5 @@
 .RData
 _site
 "C:\\nppdf32Log\\debuglog.txt"
+rmd_posts/cache
+*.RData

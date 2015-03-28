@@ -1,6 +1,3 @@
-
-
-
 ## ----indexing_examp------------------------------------------------------
 #Create a vector
 x<-c(10:19)
@@ -19,7 +16,6 @@ x[c(TRUE,FALSE)]
 #Can even get fancy
 x[x%%2==0]
 
-
 ## ----data_frame_index----------------------------------------------------
 #Let's use one of the stock data frames in R, iris
 head(iris)
@@ -35,7 +31,6 @@ obs15
 obs3to7<-iris[3:7,]
 obs3to7
 
-
 ## ----more_data_frame_index-----------------------------------------------
 #First, there are a couple of ways to use the column names
 iris$Petal.Length
@@ -50,13 +45,9 @@ head(big_iris)
 virginica_iris<-iris$Sepal.Width[iris$Species=="virginica"]
 head(virginica_iris)
 
-
-
-
 ## ----setup_dplyr,eval=FALSE----------------------------------------------
 ## install.packages("dplyr")
 ## library("dplyr")
-
 
 ## ----more_data_frame_dplyr-----------------------------------------------
 #First, select some columns
@@ -68,7 +59,6 @@ head(dplyr_big_iris)
 #Or maybe we want just the virginica species
 virginica_iris<-filter(iris,Species=="virginica")
 head(virginica_iris)
-
 
 ## ----combine_commands----------------------------------------------------
 #Intermediate data frames
@@ -86,9 +76,7 @@ dplyr_big_iris_pipe<-select(iris,Species,Sepal.Length,Petal.Length) %>%
   filter(Species=="virginica")
 head(dplyr_big_iris_pipe)
 
-
 ## ----Exercise1, echo=FALSE-----------------------------------------------
-
 
 ## ----rbind_examp---------------------------------------------------------
 #Let's first create a new small example data.frame
@@ -97,7 +85,6 @@ rbind_df<-data.frame(a=1:3,b=c("a","b","c"),c=c(T,T,F),d=rnorm(3))
 rbind_df2<-data.frame(a=10:12,b=c("x","y","z"),c=c(F,F,F),d=rnorm(3))
 rbind_df<-rbind(rbind_df, rbind_df2)
 rbind_df
-
 
 ## ----merge_example-------------------------------------------------------
 # Contrived data frame
@@ -109,9 +96,7 @@ rbind_df_merge_match
 rbind_df_merge_allx<-merge(rbind_df,rbind_df_merge_me,by="a",all.x=TRUE)
 rbind_df_merge_allx
 
-
 ## ----Exercise2, echo=FALSE-----------------------------------------------
-
 
 ## ----aggregate_examp-----------------------------------------------------
 #Chained with Pipes
@@ -120,7 +105,6 @@ group_by(iris,Species)%>%
             mean(Sepal.Width),
             mean(Petal.Length),
             mean(Petal.Width))
-
 
 ## ----arrange_example-----------------------------------------------------
 head(mtcars)
@@ -131,15 +115,12 @@ head(arrange(mtcars,desc(mpg)))
 #multiple columns: most cyl with best mpg at top
 head(arrange(mtcars,desc(cyl),desc(mpg)))
 
-
 ## ----slice_example-------------------------------------------------------
 #grab rows 3 through 10
 slice(mtcars,3:10)
 
-
 ## ----mutate_example------------------------------------------------------
 head(mutate(mtcars,kml=mpg*0.425))
-
 
 ## ----rowwise_examp-------------------------------------------------------
 #First a dataset of temperatures, recorded weekly at 100 sites.
@@ -152,7 +133,5 @@ temp_df2<-temp_df %>%
   mutate(site_mean = mean(c(week1,week2,week3,week4)))
 head(temp_df2)
 
-
 ## ----Exercise3, echo=FALSE-----------------------------------------------
-
 

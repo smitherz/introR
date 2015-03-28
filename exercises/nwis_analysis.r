@@ -1,67 +1,72 @@
 ###############################################################################
 #Script used during intro R workshop
-#12/18/14
-#written by: jwh
-#Walks through a typical data analysis workflow in R with some of the NLA
-#data
+#3/28/2015
+#written by: jwh, lwinslow, eread
+#Walks through a typical data analysis workflow in R with some of the USGS data
 ###############################################################################
 
 ###############################################################################
 #Lesson 2: Exercise 2
 #Get the data
 ###############################################################################
-wq_url<-"http://water.epa.gov/type/lakes/assessmonitor/lakessurvey/upload/NLA2007_WaterQuality_20091123.csv"
-site_url<-"http://water.epa.gov/type/lakes/assessmonitor/lakessurvey/upload/NLA2007_SampledLakeInformation_20091113.csv"
-nla_wq<-read.csv(wq_url)
-nla_sites<-read.csv(site_url)
-str(nla_wq)
-str(nla_sites)
+
+gages_sites = read.csv('http://usgs-r.github.io/introR/rmd_posts/all_gages_ii_data/conterm_basinid.csv')
+
+gages_cover = read.csv('http://lawinslow.github.io/introR/rmd_posts/all_gages_ii_data/conterm_lc06_basin.csv')
+
+str(gages_sites)
+head(gages_sites)
+nrow(gages_sites)
+
+str(gages_cover)
+
 
 ###############################################################################
 #Lesson 3: Exercise 1
 #Subset the data
 ###############################################################################
-library(dplyr)
-nla_sites_subset <- select(nla_sites, SITE_ID, VISIT_NO, SITE_TYPE, LON_DD, 
-                                 LAT_DD, STATE_NAME, WSA_ECO9, NUT_REG, 
-                                 NUTREG_NAME, LAKE_ORIGIN, RT_NLA) %>%
-  filter(VISIT_NO==1 & SITE_TYPE == "PROB_Lake")
 
-nla_wq_subset <- select(nla_wq, SITE_ID, VISIT_NO, SITE_TYPE, TURB, NTL, 
-                              PTL, CHLA, SECMEAN) %>%
-  filter(VISIT_NO==1 & SITE_TYPE == "PROB_Lake")
+library(dplyr)
+#Subset the data based on instructions
+#dplyr:
+
+gages_cover_subset = select(gages_cover, STAID, DEVNLCD06, FORESTNLCD06, BARRENNLCD06, PASTURENLCD06, CROPSNLCD06)
+
+gages_sites_subset = select(gages_sites, STAID, STANAME, DRAIN_SQKM, LAT_GAGE, LNG_GAGE, STATE, COUNTYNAME_SITE)
+
+gages_sites_nm = filter(gages_sites_subset, STATE=="NM")
+
 
 ###############################################################################
 #Lesson 3: Exercise 2
 #Merging data
 ###############################################################################
-nla_data<-merge(nla_wq_subset,nla_sites_subset,by="SITE_ID",all.x=TRUE)
-nla_data<-na.omit(nla_data)
+gages_data = left_join(gages_sites_nm, gages_cover_subset)
+
+#remove rows with any NAs if there are any 
+gages_data <- na.omit(gages_data)
 
 ###############################################################################
 #Lesson 3: Exercise 3
 #Reshape and Modify data
 ###############################################################################
-group_by(nla_data,LAKE_ORIGIN) %>%
-  summarize(mean(NTL),
-            mean(PTL),
-            mean(CHLA),
-            mean(SECMEAN),
-            mean(TURB))
+gages_cover_means = group_by(gages_data, COUNTYNAME_SITE)  %>% 
+                summarize(mean(DEVNLCD06), 
+                    mean(FORESTNLCD06), 
+                    mean(BARRENNLCD06), 
+                    mean(PASTURENLCD06), 
+                    mean(CROPSNLCD06))
+                    
+gages_cover_total = group_by(gages_data, COUNTYNAME_SITE)  %>% 
+                transmute(TOTAL = DEVNLCD06+FORESTNLCD06+BARRENNLCD06+PASTURENLCD06+CROPSNLCD06) %>%
+                summarize(mean(TOTAL))
 
-group_by(nla_data, WSA_ECO9) %>%
-  summarize(mean(TURB), 
-            mean(NTL), 
-            mean(PTL), 
-            mean(CHLA), 
-            mean(SECMEAN))
-
-summarize(nla_data, 
-           mean(TURB), 
-           mean(NTL), 
-           mean(PTL), 
-           mean(CHLA), 
-           mean(SECMEAN))
+gages_cover_all_means = summarize(gages_data, 
+        mean(DEVNLCD06), 
+        mean(FORESTNLCD06), 
+        mean(BARRENNLCD06), 
+        mean(PASTURENLCD06), 
+        mean(CROPSNLCD06))
 
 ###############################################################################
 #Lesson 4: Exercise 1

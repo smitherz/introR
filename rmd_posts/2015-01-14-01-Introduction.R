@@ -1,10 +1,7 @@
-
 ## ----setup, echo=FALSE, warning=FALSE------------------------------------
 options(repos="http://cran.rstudio.com/")
 
-
 ## ----Exercise1, echo=FALSE-----------------------------------------------
-
 
 ## ----function_examples, cache=TRUE---------------------------------------
 #Print
@@ -18,24 +15,21 @@ mean(rnorm(100))
 #Sum
 sum(rnorm(100))
 
-
 ## ----install_package, cache=TRUE-----------------------------------------
-#Install dplyr and ggplot2
-install.packages("ggplot2")
-install.packages("dplyr")
+#Install dataRetrieval and EGRET
+install.packages("dataRetrieval")
+install.packages("EGRET")
 
 #You can also put more than one in like
-install.packages(c("randomForest","formatR"))
-
+install.packages(c("dplyr","ggplot2"))
 
 ## ----load_package--------------------------------------------------------
 #Add libraries to your R Session
-library("ggplot2")
-library("dplyr")
+library("dataRetrieval")
+library("EGRET")
 
 #You can also access functions without loading by using package::function
-randomForest::randomForest
-
+dataRetrieval::readNWISdata
 
 
 ## ----other_packages, eval=FALSE------------------------------------------
@@ -48,7 +42,6 @@ randomForest::randomForest
 ## #Update, may take a while if you have many packages installed
 ## update.packages()
 
-
 ## ----help_from_console, eval=FALSE---------------------------------------
 ## #Using the help command/shortcut
 ## help("print") #Help on the print command
@@ -60,7 +53,5 @@ randomForest::randomForest
 ## ??print #Shortcut, but also searches demos and vignettes in a formatted page
 ## 
 
-
 ## ----Exercise2, echo=FALSE-----------------------------------------------
-
 
