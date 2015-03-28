@@ -50,11 +50,11 @@ quantile(iris$Sepal.Length, probs=(c(0.025,0.975)))
 ```
 
 ##Exercise 1
-For this exercise, lets first spend time doing some interactive summary stats with our NLA data.
+For this exercise, lets first spend time doing some interactive summary stats with our gages data.
 
-1. For this first part, explore each of the functions above (`summary()`, `range()`, `IQR()`, and `quantile()`) and get to know the `nla_data` data frame just a bit more.  Explore what ever variables you would like.
+1. For this first part, explore each of the functions above (`summary()`, `range()`, `IQR()`, and `quantile()`) and get to know the `gages_data` data frame just a bit more.  Explore what ever variables you would like.
 
-OPTIONAL: Next lets continue to add to our script.  This time we will be combining some of the past lessons with this one.  Our goal is to create a summary statistics data frame of `nla_data`.  What we want is a data frame that has min, max, mean, median, IQR, and quartiles as rows and the associated values for TURB, NTL, PTL, CHLA, and SECMEAN.  This may seem a bit daunting, but if we break it apart it gets a bit easier. This is a base R solution. 
+OPTIONAL: Next lets continue to add to our script.  This time we will be combining some of the past lessons with this one.  Our goal is to create a summary statistics data frame of `gages_data`.  What we want is a data frame that has min, max, mean, median, IQR, and quartiles as rows and the associated values for DEVNLCD06, FORESTNLCD06, BARRENNLCD06, PASTURENLCD06, and CROPSNLCD06.  This may seem a bit daunting, but if we break it apart it gets a bit easier. This is a base R solution. 
 
 2. Create a separate vector for each of the water quality variables.  The vector should be of length 7.
 3. Combine those vectors into a data frame.
@@ -137,9 +137,9 @@ plot(aq_temp_ecdf)
 ```
 
 ##Exercise 2
-Similar to before let's first just play around with some basic exploratory data visualization using the NLA data.
+Similar to before let's first just play around with some basic exploratory data visualization using the gages data.
 
-1. Try out each of the plotting commands discussed above and explore any of the data in our `nla_data` data frame.
+1. Try out each of the plotting commands discussed above and explore any of the data in our `gages_data` data frame.
 
 2. Let's add another section to the script to create a pairs plot of the waterquality data (TURB,NTL,PTL,CHLA, and SECMEAN).
 
