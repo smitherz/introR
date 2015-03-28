@@ -1,6 +1,6 @@
 ---
 title: "05 - Analyze: Base"
-author: Emily Read
+author: Jeffrey W. Hollister & Emily Read
 layout: post_page
 ---
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}

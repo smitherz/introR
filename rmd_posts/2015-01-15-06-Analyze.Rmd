@@ -1,6 +1,6 @@
 ---
 title: "06 - Analyze: Packages"
-author: Emily Read
+author: Jeffrey W. Hollister & Emily Read
 layout: post_page
 ---
 

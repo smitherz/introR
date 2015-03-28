@@ -1,6 +1,6 @@
 ---
 title: "03 - Clean"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Luke Winslow
 layout: post_page
 ---
 
