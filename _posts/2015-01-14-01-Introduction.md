@@ -245,6 +245,13 @@ library("EGRET")
 
 
 
+{% highlight text %}
+## Warning: no function found corresponding to methods exports from 'spam'
+## for: 'show'
+{% endhighlight %}
+
+
+
 {% highlight r %}
 #You can also access functions without loading by using package::function
 dataRetrieval::readNWISdata
@@ -336,11 +343,11 @@ apropos("print") #Returns all available functions with "print" in the name
 
 One nice way to explore the features of a package is to see a list of all the functions. In the lower right-hand corner, there is a "Packages" tab. From this tab, if you click on the name of a package, you will get a list of all the documentation for that package. 
 
-![Package List](introR/figure/rstudio_packages.png)
+![Package List](/introR/figure/rstudio_packages.png)
 
 This is very helpful if you've forgotten the name of a function or just want to see a quick overview of everything a package has to offer. 
 
-![Package List](introR/figure/rstudio_dataRetrieval.png)
+![Package List](/introR/figure/rstudio_dataRetrieval.png)
 
 
 ###Official R Resources
