@@ -33,14 +33,3 @@ summary(lm_aq2)
 
 ## ----Exercise1, echo=FALSE-----------------------------------------------
 
-## ----Choptank_lm_example-------------------------------------------------
-#Choptank River at Greensboro, MD:
-siteNumber <- "01491000"
-startDate <- "1979-10-01"
-endDate <- "2011-09-30"
-param<-"00631"
-Daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
-INFO<- readNWISInfo(siteNumber,param,interactive=FALSE)
-INFO$shortName <- "Choptank River"
-Sample <- readNWISSample(siteNumber,param,startDate,endDate)
-
