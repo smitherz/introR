@@ -71,7 +71,7 @@ list.files()
 
 ## ------------------------------------------------------------------------
 0/0
-NaN.
+NaN
 
 ## ----use_c---------------------------------------------------------------
 char_vector <- c("Joe","Bob","Sue")
@@ -182,7 +182,7 @@ summary(web_df)
 ## ----dataRetrievalExample, eval=FALSE------------------------------------
 ## library(dataRetrieval)
 ## # Gather NWIS data:
-## siteListPhos <- readNWISdata(stateCd="OH",parameterCd="00665",
+## siteListPhos <- readNWISdata(stateCd="NM",parameterCd="00665",
 ##                               siteOutput="expanded",
 ##                              drainAreaMin=400,siteType="ST",
 ##                              service="site")

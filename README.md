@@ -1,9 +1,8 @@
 introR
-
 ======
 
 Introductory R Training materials for workshops organized across the USGS. 
-
+==
 
 USGS Authors: [Luke Winslow](@lwinslow), [Emily Read](@eread-USGS), [Laura DeCicco](@ldecicco-USGS), [Jordan Read](@jread-USGS)
 
