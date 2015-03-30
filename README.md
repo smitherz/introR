@@ -1,8 +1,15 @@
 introR
-====
-Introductory R Training materials for workshop given Jan 14-15,2015 at USEPA Gulf Ecology Division and Jan 7-8, 2015 and Jan 22-23, 2105 at USEPA Atlantic Ecology Division.
 
-Author: Jeffrey W. Hollister
+======
+
+Introductory R Training materials for workshops organized across the USGS. 
+
+
+USGS Authors: [Luke Winslow](@lwinslow), [Emily Read](@eread-USGS), [Laura DeCicco](@ldecicco-USGS), [Jordan Read](@jread-USGS)
+
+Materials originally from USEPA, heavily modified for USGS. 
+
+Original Author: Jeffrey W. Hollister
 URL: http://usepa.github.io/introR
 
 Theme for website based off of the [Green Tea Theme](http://jekyllthemes.org/themes/green-tea/) by [Richard Bray](http://richbray.me/frap/).  
@@ -15,3 +22,4 @@ This software is in the public domain because it contains materials that origina
 Although this software program has been used by the U.S. Geological Survey (USGS), no warranty, expressed or implied, is made by the USGS or the U.S. Government as to the accuracy and functioning of the program and related program material nor shall the fact of distribution constitute any such warranty, and no responsibility is assumed by the USGS in connection therewith.
 
 This software is provided "AS IS."
+

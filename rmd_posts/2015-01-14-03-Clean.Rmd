@@ -1,6 +1,6 @@
 ---
 title: "03 - Clean"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Luke Winslow
 layout: post_page
 ---
 
@@ -267,12 +267,15 @@ Let's practice some of these last functions with our Gages data.
 ```
 
 ##Exercise 3
-Add a new section to our script to calculate the gages landcover means. 
 
-1. Use `gages_data` that we created in the previous exercise.
-2. Add some lines to your script to calculate the mean by COUNTYNAME_SITE, for DEVNLCD06, FORESTNLCD06, BARRENNLCD06, PASTURENLCD06, and CROPSNLCD06. Save to a data frame named   `gages_cover_means`.
-3. It might be interesting to compare the grouped means to the means of each value for the entire dataset.  Using `summarize()`, calculate the mean coverage for the state (hint: no groups!).  Save this as `gages_cover_all_means`.
-4. We removed some of the landcover types when we originally subset the data at the beginning of the exercise. Create a table called `gages_cover_total` to see what the total percent coverage is of the landcover types we selected (note: it is probably not 100%). Hint: think `transmute()`.
-5. Bonus: Figure out which landcover type we are missing for Harding county
-6. Double Bonus: Do #2 above across the whole U.S.
+Next, we're going to pull in and merge additional water data from NWIS for NM GAGES-II sites. Keep track of your method by adding to your R script and commenting as you go. This exercise has several steps that each depend on the prior one- use your stickies and don't get frustrated! We'll work through these one at a time. If you complete a step and notice that your neighbor has not, see if you can answer any questions to help them get it done. 
+
+1)  Return to the code chunk in [Lesson 02 Get](introR/rmd_posts/2015-01-14-02-Get.Rmd) that accesses NWIS data. Modify that code chunk and add it to your R script to access additional physical and water quality variables at NM sites: temperature ('00010'), discharge ('00060'), and specific conductance ('00095'). Save these data in data frames named using the variable name and state abbreviation. 
+
+2) Next, because we are just exploring here, let's make some assumptions about the variables we have just collected: (a) all of the measurements we have in the data frames are good (we don't want to throw any out because of comment codes indicating issues with the data) and, (b) the only three variables we care about in theis data frame are gage ID (a.k.a., 'site_no'), measurement date ('sample_dt'), and value of the measurement made ('results_va'). These assumptions may *not* hold for other analyses, but for the purposes of this exercise, we'll make them. Subset the four water measurement data frames to include only those three columns each. 
+
+3) Rename the columns to prepare to merge the data with the 'gages_data' data frame. Remember, not all NWIS sites we have collected data from are GAGES-II sites, so we need to merge on a common variable- the columns across the 'gages_data' and the water variables that include the site ID should all be named consistently. Second, consider that 'results_va' columns are distinct across data frames. Re-name those columns prior to the merge so they reflect the variable included (e.g, 'results_temp').
+
+4) Let's merge the water quality data we have just collected with the GAGES-II sites. Create a new data frame called 'gages_data_wq' by merging 'gages_data' with the NWIS variables we've already collected: phosphorus, temperature, discharge, and specific conductance. In the end, you should have with a data frame that includes all rows and columns GAGES-II sites for NM, in addition to five new columns: 'sample_dt', plus the four water quality variables we're merging. Hint: the number of rows in your expanded 'gages_data_wq' data frame will be much longer than in the original 'gages_data' data frame, and depending on the frequency of observations made for different variables, some variables may be more sparsely populated than others. 
+
 

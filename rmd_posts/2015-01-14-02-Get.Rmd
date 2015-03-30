@@ -175,7 +175,7 @@ is.na()#Will tell you if a value is NA
 
 ```{r}
 0/0
-NaN.
+NaN
 ```
 
 ###Data Structures
@@ -379,7 +379,7 @@ The USGS has created an R package to directly link NWIS with R. It is called `da
 ```{r dataRetrievalExample, eval=FALSE}
 library(dataRetrieval)
 # Gather NWIS data:
-siteListPhos <- readNWISdata(stateCd="OH",parameterCd="00665", 
+siteListPhos <- readNWISdata(stateCd="NM",parameterCd="00665", 
                               siteOutput="expanded", 
                              drainAreaMin=400,siteType="ST",
                              service="site") 
@@ -397,7 +397,7 @@ So now we have a basic feel on how to work in R, how data is dealt with, and how
 ```
 
 ##Exercise 2
-From here on out I hope to have these exercises begin to build on each other. We may not do that 100%, but there should at least be a modicum of continuity. For this exercise we are going to grab some data, look at that data, and be able to describe some basic information about that dataset.  The data we will use are phosphorous data from Ohio.
+From here on out I hope to have these exercises begin to build on each other. We may not do that 100%, but there should at least be a modicum of continuity. For this exercise we are going to grab some more data, look at that data, and be able to describe some basic information about that dataset.  The data we will use are phosphorus data observed at sites included with the Geospatial Attributes of Gages for Evaluating Streamflow, version II (GAGES-II) sites from New Mexico. Navigate to the abstract on the [GAGES-II dataset](http://water.usgs.gov/GIS/metadata/usgswrd/XML/gagesII_Sept2011.xml) metadata page for additional information on GAGES-II sites and site metadata. 
 
 1. Create a new script in RStudio.  Name it "usgs_analysis.R"
 2. As you write the script comment as you go.
