@@ -1,6 +1,6 @@
 ---
 title: "05 - Analyze: Base"
-author: Emily Read
+author: Jeffrey W. Hollister & Emily Read
 layout: post_page
 ---
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
@@ -9,9 +9,7 @@ options(repos="http://cran.rstudio.com/")
 if(!require("dplyr")){
   install.packages("dplyr")
 }
-if(!require("randomForest")){
-  install.packages("randomForest")
-}
+
 
 library("dplyr")
 ```
@@ -88,22 +86,8 @@ All of your standard modelling approaches (and then some) are available in R inc
 ```
 
 ##Excercise 1
-For this exercise, let's start to look at some of the statistical tests and relationships in some USGS data.
+For this exercise, let's start to look at some of the statistical tests and relationships for NWIS data we collected for GAGES-II sites in NM. We have already plotted some of these variables together, so you may have an idea ahead of time about what the statistical tests might show. 
 
-Start by using 'dataRetrieval' to gather data from NWIS:
+1. First, lets take a look at the relationship between discharge, temperature specific conductance, and phosphorus concentration across Sentinel and non-Sentinel sites.  Add a section to your script that tests for a difference in the mean value of across these between NSIP Sentinal sites and non-Sentinel sites. For this we will have the script save each test to a new object and print the results to the screen. Hint: consider that there are many fewer Sentinel sites than non-Sentinel sites. Consider the statistical implcations for the differences in sample sizes. 
 
-```{r Choptank_lm_example}
-#Choptank River at Greensboro, MD:
-siteNumber <- "01491000"
-startDate <- "1979-10-01"
-endDate <- "2011-09-30"
-param<-"00631"
-Daily <- readNWISDaily(siteNumber,"00060",startDate,endDate)
-INFO<- readNWISInfo(siteNumber,param,interactive=FALSE)
-INFO$shortName <- "Choptank River"
-Sample <- readNWISSample(siteNumber,param,startDate,endDate)
-```
-
-1. First, lets take a look at the relationship between discharge and inorganic N.  Add a section to your script that tests for a difference in the mean value of TURB, NTL, PTL, CHLA, and SECMEAN between man made and natural lakes.  For this we will have the script save each test to a new object and print the results to the screen.
-
-2. Next, lets build some linear models that build a linear model to be used to predict CHLA.  Again save your model to an object and print the summary of that model to the screen
+2. Next, lets build some linear models that build a linear model to be used to predict phosphorus concentrations across all GAGES-II sites in NM. Chose at least three, and as many as ten, explanatory variables that you think may be useful to predicting phosphorus. Again save your model to an object and print the summary of that model to the screen. 

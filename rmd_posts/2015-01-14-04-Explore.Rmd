@@ -1,6 +1,6 @@
 ---
 title: "04 - Explore"
-author: Jeffrey W. Hollister
+author: Jeffrey W. Hollister & Emily Read
 layout: post_page
 ---
 Our next three lessons (Explore, Analyze, and Visualize) don't actually split neatly into groups.  That being said, I will try my best, but there will be overlap.  For this lesson we are going to focus on some of the first things you do when you start to explore a dataset including basic summary statistics and simple visualizations with base R.
@@ -50,15 +50,15 @@ quantile(iris$Sepal.Length, probs=(c(0.025,0.975)))
 ```
 
 ##Exercise 1
-For this exercise, lets first spend time doing some interactive summary stats with our NLA data.
+Next, we're going to explore the distribution of the NM phosphorus data using base R statistical functions
 
-1. For this first part, explore each of the functions above (`summary()`, `range()`, `IQR()`, and `quantile()`) and get to know the `nla_data` data frame just a bit more.  Explore what ever variables you would like.
+1. For this first part, explore each of the functions above (`summary()`, `range()`, `IQR()`, and `quantile()`) and get to know more about the NWIS water variables we collected and merged into our 'gages_data_wq' data frame.  Specifically, you'll want to focus on the 'results_xx' variables within the 'gages_data_wq' data frame Hint: Use the $ operator to index a particular columns of this data frame using the functions above. 
 
-OPTIONAL: Next lets continue to add to our script.  This time we will be combining some of the past lessons with this one.  Our goal is to create a summary statistics data frame of `nla_data`.  What we want is a data frame that has min, max, mean, median, IQR, and quartiles as rows and the associated values for TURB, NTL, PTL, CHLA, and SECMEAN.  This may seem a bit daunting, but if we break it apart it gets a bit easier. This is a base R solution. 
+OPTIONAL: Next lets continue to add to our script.  This time we will be combining some of the past lessons with this one.  Our goal is to create a summary statistics data frame of `gages_data_wq`.  What we want is a data frame that has min, max, mean, median, IQR, and quartiles for each of the four varaibles measured at 'gages' sites in NM that we pulled from NWIS.  This may seem a bit daunting, but if we break it apart it gets a bit easier. This is a base R solution. 
 
-2. Create a separate vector for each of the water quality variables.  The vector should be of length 7.
-3. Combine those vectors into a data frame.
-4. Make sure your column names AND row names make sense.
+2. Create a separate vector for each of the water quality variables.  The vector should be of length 7. You can choose the name of the vector; choose something descriptive that would be obvious to your neighbor if you shared the script or data frame. 
+
+3. Make sure your column names AND row names make sense.
 
 ##Basic Visualization
 Exploratory data analysis tends to be a little bit about stats and a lot about visualization.  Later we are going to go into more detail on `ggplot2` which is becoming the gold standard of viz in R, but for now we will look at some of the simple, yet very useful, plots that come with base R.  I find these to be great ways to quickly explore data.  
@@ -137,10 +137,10 @@ plot(aq_temp_ecdf)
 ```
 
 ##Exercise 2
-Similar to before let's first just play around with some basic exploratory data visualization using the NLA data.
+Similar to before let's first just play around with some basic exploratory data visualization using water quality data in your newly created 'gages_data_wq' data frame.
 
-1. Try out each of the plotting commands discussed above and explore any of the data in our `nla_data` data frame.
+1. Try out each of the plotting commands discussed above and explore any of the data in our `gages_data_wq` data frame.
 
-2. Let's add another section to the script to create a pairs plot of the waterquality data (TURB,NTL,PTL,CHLA, and SECMEAN).
+2. Let's add another section to the script to create a pairs plot of the NM data physical and water quality we have collected so far (phosphorus, discharge, temperature, and specific conductance).
 
-3. Lastly, add a boxplot of CHLA that shows a boxplot for each of the groups in RT_NLA.  Feel free to try and log transform the CHLA data (not required).
+3. Lastly, add a boxplot of discharge that shows a boxplot for [NSIP Sentinel](http://water.usgs.gov/nsip/federalneeds.html) ('NSIP_SENTINEL') sites versus non-Sentinel sites. Feel free to try and log transform the discharge data (not required).
