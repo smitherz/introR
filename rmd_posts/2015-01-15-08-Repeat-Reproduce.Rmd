@@ -67,7 +67,7 @@ So, this is of course a silly example.  Functions are useful when we want to com
 myplot<-function(x,y,grp,file){
   my_p<-ggplot(data.frame(x,y,grp),aes(x=x,y=y)) +
             geom_point(aes(color=grp, shape=grp),size=5) +
-            geom_smooth(method="lm",aes(colour=grp))+
+            geom_smooth(method="lm",aes(colour=grp)) +
             labs(x=substitute(x),y=substitute(y))
   ggsave(my_p,file=file)
   return(my_p)
@@ -195,7 +195,7 @@ add_vecs2<-function(vec1,vec2){
 system.time(add_vecs2(large_vec1,large_vec2))
 ```
 
-Now thats better.  In short, if an obvious vector or primitive solution exists, use that.  If those aren't clear and you need to use a loop, don't be afraid to use one.  There are plenty of examples where a vectorized solution exists for a loop, but it may be difficult to code and understand.  Personally, I think it is possible to go too far down the vectorized path.  Do it when it makes sense, otherwise take advantage of the for loop! You can always try and speed things up after you have got your code working the first time.
+Now that's better.  In short, if an obvious vector or primitive solution exists, use that.  If those aren't clear and you need to use a loop, don't be afraid to use one.  There are plenty of examples where a vectorized solution exists for a loop, but it may be difficult to code and understand.  Personally, I think it is possible to go too far down the vectorized path.  Do it when it makes sense, otherwise take advantage of the for loop! You can always try and speed things up after you have got your code working the first time.
 
 ###return
 The last control structure we are going to talk about is `return()`.  All `return()` does is provide a result from a function and terminates the function.  You may be asking yourself, didn't we terminate and get a value from the functions we just created?  We did and `return()` is not mandatory for R functions as they will return the last calculation.  However, I do think that including a `return()` is good practice and allows us to be clear and more specific about what you get out of your functions.  Let's take a look at the `sum_vec()` function (even though, I just explained why this is not the best function), the `odd_even()` function  and make simple changes to take advantage of `return()`.
