@@ -47,7 +47,7 @@ library("EGRET")
 help(package="EGRET")
 ```
 
-#Flow history
+##Flow history
 There are quite a few functions included with this package. First let's take a look at the flow history for a site in California with an observational record of more than 100 years:
 
 ```{r flow_history_example}
