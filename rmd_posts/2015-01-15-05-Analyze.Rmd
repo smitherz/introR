@@ -25,7 +25,7 @@ The focus of this workshop hasn't really been statistics, its been more about R,
 - Get a taste of wide array of analyses in base R
 
 ##Base statistics
-The capabilities that come out of the box with R are actually quite good and used to (i.e. before R) cost you quite a bit to access.  Now it all comes for free!  Some of the things you can do with R without any additional packages inlcude: logistic regression (and all manner of generalized linear models), correlation, principle components analysis, chi-squared tests, clustering, loess, ANOVA, MANOVA, ...  In short, we can do a lot without moving out of base r and `stats`.
+The capabilities that come out of the box with R are actually quite good and used to (i.e. before R) cost you quite a bit to access.  Now it all comes for free!  Some of the things you can do with R without any additional packages include: logistic regression (and all manner of generalized linear models), correlation, principle components analysis, chi-squared tests, clustering, loess, ANOVA, MANOVA, ...  In short, we can do a lot without moving out of base r and `stats`.
 
 We will talk about a few analyses just to show the tip of the iceberg of what is available.
 
@@ -85,9 +85,9 @@ All of your standard modelling approaches (and then some) are available in R inc
 ```{r Exercise1, echo=FALSE}
 ```
 
-##Excercise 1
+##Exercise 1
 For this exercise, let's start to look at some of the statistical tests and relationships for NWIS data we collected for GAGES-II sites in NM. We have already plotted some of these variables together, so you may have an idea ahead of time about what the statistical tests might show. 
 
-1. First, lets take a look at the relationship between discharge, temperature specific conductance, and phosphorus concentration across Sentinel and non-Sentinel sites.  Add a section to your script that tests for a difference in the mean value of across these between NSIP Sentinal sites and non-Sentinel sites. For this we will have the script save each test to a new object and print the results to the screen. Hint: consider that there are many fewer Sentinel sites than non-Sentinel sites. Consider the statistical implcations for the differences in sample sizes. 
+1. First, lets take a look at the relationship between discharge, temperature specific conductance, and phosphorus concentration across Sentinel and non-Sentinel sites.  Add a section to your script that tests for a difference in the mean value of across these between NSIP Sentinal sites and non-Sentinel sites. For this we will have the script save each test to a new object and print the results to the screen. Hint: consider that there are many fewer Sentinel sites than non-Sentinel sites. Consider the statistical implications for the differences in sample sizes. 
 
 2. Next, lets build some linear models that build a linear model to be used to predict phosphorus concentrations across all GAGES-II sites in NM. Chose at least three, and as many as ten, explanatory variables that you think may be useful to predicting phosphorus. Again save your model to an object and print the summary of that model to the screen. 
